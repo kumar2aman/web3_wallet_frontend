@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 function CreateWallet() {
   const [data, setData] = useState<String[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Add a loading state
@@ -8,9 +8,12 @@ function CreateWallet() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/v1/createmnemonic");
+        const response = await axios.get(
+          "http://localhost:8080/api/v1/createmnemonic"
+        );
+
         const monic = response.data;
-        setData(monic);
+        setData(monic.data);
       } catch (error) {
         console.error("Error fetching mnemonic:", error);
       } finally {
@@ -27,18 +30,16 @@ function CreateWallet() {
       </h1>
       <h4 className="text-yellow-400 font-ubuntu font-bold mt-4 leading-10">
         Take a screenshot or copy it <br />
-        <span className="text-red-600/80">
-          Do not share it with anyone!!
-        </span>
+        <span className="text-red-600/80">Do not share it with anyone!!</span>
       </h4>
 
       {/* Conditionally render based on the loading state */}
       {isLoading ? (
         <div className="mt-24 text-white">Loading recovery phrase...</div>
       ) : (
-        <div className="grid grid-cols-4 items-center justify-center gap-5 mt-24 bg-gray-600 border-2 p-4 rounded-xl">
-          {data?.map((e, index) => (
-            <div key={index} className="flex items-center justify-center font-ubuntu p-4 h-14 border-2 bg-blue-300 rounded-xl">
+        <div className=" grid grid-cols-4 items-center justify-center  gap-5 mt-24 bg-gray-600 border-2 p-4 rounded-xl">
+          {data?.map((e) => (
+            <div className=" flex items-center  justify-center font-ubuntu  p-4 h-14  border-2  bg-blue-300  rounded-xl">
               {e}
             </div>
           ))}
