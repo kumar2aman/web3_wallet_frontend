@@ -2,7 +2,7 @@ import React from "react";
 
 function Homepage() {
   return (
-    <div className="bg-[#27272a] h-screen w-full flex flex-col  items-center ">
+    <div className="bg-background h-screen w-full flex flex-col  items-center ">
       <div className="mt-24 font-bold font-ubuntu text-[20vh] oldstyle-nums bg-gradient-to-b from-red-300 via-pink-600 to-red-600 bg-clip-text text-transparent">
         Web3Pocket
       </div>
