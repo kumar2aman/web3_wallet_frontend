@@ -15,8 +15,8 @@ function Dashboard() {
           <h1 className="text-3xl font-bold mb-6 font-ubuntu">Dashboard</h1>
           <Balance title="solana" amount="11 SOL" />
           <Balance title="etherem" amount="7 ETH" />
-          <KeyPair title= "sonlana" key= "123"/>
-          <KeyPair title= "etherem" key= "321"/>
+          <KeyPair title= "sonlana" />
+        
           
         </div>
       </div>
