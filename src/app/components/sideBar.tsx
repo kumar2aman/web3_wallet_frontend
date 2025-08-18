@@ -1,6 +1,9 @@
+
 "use client"
 import React, { useEffect, useState } from "react";
 import { Pencil, Plus, Settings } from "lucide-react";
+import { Dialog, DialogTrigger } from "./ui/dialog";
+import { CreateAccount} from "./createAccount";
 function SideBar() {
 
 
@@ -10,7 +13,7 @@ const [account, setAccount] = useState<string[]>()
 
 useEffect(()=>{
    setAccount(data)
-})
+},[])
 
 
 
@@ -27,9 +30,10 @@ useEffect(()=>{
         </div>
      
       <div className="flex flex-col justify-between items-center gap-4 border-t-2 pt-7 w-full mb-10">
-        <div className="p-3 rounded-xl bg-transparent hover:bg-white group cursor-pointer transition-colors duration-200">
-          <Plus className="text-white group-hover:text-black size-6" />
-        </div>
+   
+<CreateAccount/>
+       
+       
 
         <div className="p-3 rounded-xl bg-transparent hover:bg-white group cursor-pointer transition-colors duration-200">
           <Pencil className="text-white group-hover:text-black size-6" />
