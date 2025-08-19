@@ -12,10 +12,18 @@ import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useAccount } from "../context/accountProvider";
+
 
 export function CreateAccount() {
+
+
+const user = useAccount()
+
+console.log(user?.account)
+
   return (
+
     <Dialog>
       <form>
         <DialogTrigger asChild>
@@ -29,7 +37,7 @@ export function CreateAccount() {
               Create New Account
             </DialogTitle>
             <DialogDescription className="text-white font-ubuntu text-center">
-              Click create when you&apos;re done.
+              Click create when you&apos;re done.{user?.account}
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4">
@@ -40,6 +48,7 @@ export function CreateAccount() {
               <Input
                 className="text-white font-ubuntu border-blue-600 w-full h-10 px-2 border-2 rounded-xl bg-black/40 "
                 type="text"
+                onChange={(e)=> user?.setAccount(e.target.value) }
               />
             </div>
           </div>
