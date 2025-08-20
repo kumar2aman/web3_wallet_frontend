@@ -13,14 +13,22 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Plus } from "lucide-react";
 import { useAccount } from "../context/accountProvider";
+import { useState } from "react";
 
 
 export function CreateAccount() {
 
-
+const [userAccount, setUserAccount] = useState('')
 const user = useAccount()
 
-console.log(user?.account)
+  
+const accountHandler = (e:any) => {
+   e.preventDefault(); // Prevent form submission
+ if (!userAccount) return;
+  user?.setAccount(pervData => [...pervData, userAccount]);
+  setUserAccount(' ')
+};
+ 
 
   return (
 
@@ -48,7 +56,7 @@ console.log(user?.account)
               <Input
                 className="text-white font-ubuntu border-blue-600 w-full h-10 px-2 border-2 rounded-xl bg-black/40 "
                 type="text"
-                onChange={(e)=> user?.setAccount(e.target.value) }
+                onChange={(e)=> setUserAccount(e.target.value) }
               />
             </div>
           </div>
@@ -61,7 +69,7 @@ console.log(user?.account)
                 Cancel
               </Button>
             </DialogClose>
-            <Button className="text-white cursor-pointer " type="submit">
+            <Button className="text-white cursor-pointer " type="submit" onClick={accountHandler}>
               Create
             </Button>
           </DialogFooter>

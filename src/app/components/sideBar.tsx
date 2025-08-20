@@ -11,18 +11,14 @@ import { useAccount } from "../context/accountProvider";
 function SideBar() {
 
 
-    const data  = ["A1"] 
 
 
 
-const {account}:any = useAccount()
-
+const users = useAccount();
 
 useEffect(() => {
-  console.log("Account changed:", account);
-}, [account]);
-
-
+  console.log("Updated users:", users);
+}, [users?.account]); // Reacts when account changes
 
 
 

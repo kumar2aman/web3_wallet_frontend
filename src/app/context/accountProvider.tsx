@@ -3,8 +3,8 @@
 import React, { createContext, useContext, useState } from "react";
 
 interface AccountContext {
-  account: string;
-  setAccount: React.Dispatch<React.SetStateAction<string>>;
+  account: string[];
+  setAccount: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
  const accountContext = createContext<AccountContext | null>(null);
@@ -14,7 +14,7 @@ export function Contextprovider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [account, setAccount] = useState("");
+  const [account, setAccount] = useState<string[]>(["A1"]);
 
   return (
     <accountContext.Provider value={{ account, setAccount }}>
