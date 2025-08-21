@@ -13,7 +13,7 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Plus } from "lucide-react";
 import { useAccount } from "../context/accountProvider";
-import { useState } from "react";
+import {  useState } from "react";
 
 
 export function CreateAccount() {
@@ -22,10 +22,10 @@ const [userAccount, setUserAccount] = useState('')
 const user = useAccount()
 
   
-const accountHandler = (e:any) => {
-   e.preventDefault(); // Prevent form submission
+const accountHandler = () => {
+ 
  if (!userAccount) return;
-  user?.setAccount(pervData => [...pervData, userAccount]);
+  user?.setAccount( userAccount);
   setUserAccount(' ')
 };
  

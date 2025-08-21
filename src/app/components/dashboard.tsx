@@ -3,6 +3,8 @@ import Balance from "./balance";
 import SideBar from "./sideBar";
 import KeyPair from "./keyPair";
 
+
+
 function Dashboard() {
   return (
     <>
@@ -16,7 +18,7 @@ function Dashboard() {
           <Balance title="solana" amount="11 SOL" />
           <Balance title="etherem" amount="7 ETH" />
           <KeyPair title= "sonlana" />
-        
+    
           
         </div>
       </div>
