@@ -1,6 +1,6 @@
 import React from 'react'
 import Dashboard from '../components/dashboard'
-import { Contextprovider } from '../context/accountProvider'
+import { Contextprovider } from '../../lib/accountProvider'
 
 function page() {
   return (

@@ -12,7 +12,7 @@ import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Plus } from "lucide-react";
-import { useAccount } from "../context/accountProvider";
+import { useAccount } from "../../lib/accountProvider";
 import {  useState } from "react";
 
 

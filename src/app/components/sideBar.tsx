@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Pencil, Settings } from "lucide-react";
 
 import { CreateAccount } from "./createAccount";
-import { useAccount } from "../context/accountProvider";
+import { useAccount } from "../../lib/accountProvider";
 
 function SideBar() {
   const [data, setData] = useState<string[]>([]);
