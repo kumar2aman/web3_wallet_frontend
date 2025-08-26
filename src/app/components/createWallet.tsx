@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CryptoJS from "crypto-js";
+
 function CreateWallet() {
   const [data, setData] = useState<String[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Add a loading state
@@ -14,7 +16,14 @@ function CreateWallet() {
 
         const monic = response.data;
         setData(monic.data);
-        localStorage.setItem("monic", JSON.stringify(monic.data));
+
+        // Encrypt
+        const encryptedMnemonic = CryptoJS.AES.encrypt(   
+          monic.data.join(","),
+          "secret-key"
+        ).toString(); 
+       
+        localStorage.setItem("encryptedMnemonic", encryptedMnemonic); // Store the encrypted mnemonic
       } catch (error) {
         console.error("Error fetching mnemonic:", error);
       } finally {
@@ -24,15 +33,22 @@ function CreateWallet() {
     fetchData();
   }, []);
 
-
   const handleCopy = async () => {
-    const mnemonic = localStorage.getItem("monic");
-    console.log("mnemonic", mnemonic);
+    // Decrypt
+
+    const stored = localStorage.getItem("encryptedMnemonic");
+
+    if (!stored) return; // Handle the case where the key is not found
+
+    const decrypted = CryptoJS.AES.decrypt(stored, "secret-key");
+    const mnemonic = decrypted.toString(CryptoJS.enc.Utf8);
+
     if (mnemonic) {
-     await axios.post("http://localhost:8080/api/v1/wallet/createhdMnemonic", JSON.parse(mnemonic) );
+      await axios.post("http://localhost:8080/api/v1/wallet/createhdMnemonic", {
+        mnemonic,
+      });
     }
   };
-
 
   return (
     <div className="flex flex-col items-center w-[50vw] h-[80vh]">
@@ -58,7 +74,10 @@ function CreateWallet() {
       )}
 
       <div className="mt-12">
-        <button onClick={handleCopy} className="bg-white cursor-pointer w-62 h-16 rounded-xl text-2xl font-ubuntu font-bold border-2 hover:bg-pink-400/80">
+        <button
+          onClick={handleCopy}
+          className="bg-white cursor-pointer w-62 h-16 rounded-xl text-2xl font-ubuntu font-bold border-2 hover:bg-pink-400/80"
+        >
           Continue
         </button>
       </div>
