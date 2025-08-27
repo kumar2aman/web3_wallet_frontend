@@ -1,6 +1,26 @@
-import React from "react";
+"use client";
+
+import { usePassword } from "@/lib/passwordProvider";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 function Signup() {
+
+  const router = useRouter();
+
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const user = usePassword();
+
+  if (!user) return null;
+
+  const handleSignup = () => {
+    user?.setPassword(password);
+   
+    router.push("/createwallet");
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col items-center  py-7  gap-12 px-10 w-[30vw] h-[50vh] border-2 border-blue-600 rounded-3xl shadow-lg shadow-blue-600 ">
@@ -19,6 +39,9 @@ function Signup() {
           <div className=" ">
             <h2 className="mb-4 font-ubuntu text-xl text-white">password</h2>
             <input
+            value={password}
+              onChange={(e)=>setPassword(e.target.value)}
+
               type="password"
               className="w-full h-12 bg-white rounded-2xl border-black border-3 px-3 font-ubuntu font-semibold text-xl"
             />
@@ -26,7 +49,7 @@ function Signup() {
         </div>
       </div>
       <div className="mt-12">
-        <button className="bg-white cursor-pointer w-62 h-16 rounded-xl text-2xl font-ubuntu font-bold border shadow-md shadow-white hover:bg-pink-400/80 ">
+        <button onClick={handleSignup} className="bg-white cursor-pointer w-62 h-16 rounded-xl text-2xl font-ubuntu font-bold border shadow-md shadow-white hover:bg-pink-400/80 ">
           Continue
         </button>
       </div>

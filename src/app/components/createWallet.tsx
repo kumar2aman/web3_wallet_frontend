@@ -1,11 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import axios from "axios";
 import CryptoJS from "crypto-js";
+import { useAccount } from "@/lib/accountProvider";
 
 function CreateWallet() {
   const [data, setData] = useState<String[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Add a loading state
+
+  const user = useAccount();
+
+
+  const password = user?.account;
+
+  if (!password) return null;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,14 +24,16 @@ function CreateWallet() {
 
         const monic = response.data;
         setData(monic.data);
-
+          console.log("password",password)
         // Encrypt
         const encryptedMnemonic = CryptoJS.AES.encrypt(   
           monic.data.join(","),
-          "secret-key"
+         password
         ).toString(); 
        
         localStorage.setItem("encryptedMnemonic", encryptedMnemonic); // Store the encrypted mnemonic
+
+        console.log("Encrypted Mnemonic:", encryptedMnemonic);
       } catch (error) {
         console.error("Error fetching mnemonic:", error);
       } finally {
